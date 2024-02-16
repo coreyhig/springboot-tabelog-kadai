@@ -1,0 +1,217 @@
+ <!DOCTYPE html>
+  <html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+     <head>
+        <div th:replace="~{fragment :: meta}"></div>      
+        <div th:replace="~{fragment :: styles}"></div>
+      	
+         <title>nagoyameshi</title>	
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+<script type="text/javascript">
+        $(document).ready(function(){
+            $('.slider').bxSlider({
+                auto: true,
+                pause: 5000,
+            });
+        });
+</script>
+     </head>
+
+     <body>
+                  <div class="nagoyameshi-wrapper">
+             <!-- ヘッダー -->
+             <div th:replace="~{fragment :: header}"></div>
+             
+             <main>
+                 <div class="container pt-4 pb-5 nagoyameshi-container">
+                     <div th:if="${param.loggedIn}" class="alert alert-info">
+                         ログインしました。
+                     </div>  
+                     
+                     <div th:if="${param.loggedOut}" class="alert alert-info">
+                         ログアウトしました。
+                     </div>
+                         <div th:if="${successMessage}" class="alert alert-info">
+                         <span th:text="${successMessage}"></span>
+                     </div> 
+                     
+                <div class="slider">
+                <img th:src="@{/images/misokatsu.jpg}"width="450" height="450">
+                <img th:src="@{/images/misonikomi.jpg}"width="450" height="450">  
+                <img th:src="@{/images/tebasaki.jpg}" width="450" height="450">
+                <img th:src="@{/images/hitumabushi.jpg}" width="450" height="450">
+                <img th:src="@{/images/kishimen.jpg}" width="450" height="450">
+			    </div>      
+
+                     
+                                          <div class="d-flex justify-content-center">                                            
+                         <form method="get" th:action="@{/Store}" class="mb-5 nagoyameshi-search-form">
+                             <div class="input-group">
+								 
+	
+                                 <input type="text" class="form-control" name="keyword" th:value="${keyword}" placeholder="店舗名・目的地">
+                                 <button type="submit" class="btn text-white shadow-sm nagoyameshi-btn">検索</button> 
+                             </div>
+                                                                                                                     
+                                            
+                         </form>  
+                  
+                     </div>       
+                                              
+                     <h2 class="text-center mb-3">新着</h2>
+                     <div class="row row-cols-lg-5 row-cols-2 g-3 mb-5">                                        
+                         <div class="col" th:each="newStore : ${newStore}">
+                             <a th:href="@{/Store/__${newStore.getId()}__}" class="link-dark nagoyameshi-card-link">
+                                 <div class="card h-100">                                                                        
+                                     <img th:if="${newStore.getImageName()}" th:src="@{/storage/__${newStore.getImageName()}__}" class="card-img-top nagoyameshi-vertical-card-image" alt="店舗画像">                                     
+                                     <img th:unless="${newStore.getImageName()}" th:src="@{/images/noImage.png}" class="card-img-top nagoyameshi-vertical-card-image" alt="NO IMAGE">                                                                                                                        
+                                     <div class="card-body">                                    
+                                         <h3 class="card-title" th:text="${newStore.getName()}"></h3>
+                                         <p class="card-text mb-1">
+                                             <small class="text-muted" th:text="${newStore.getAddress()}"></small>                                            
+                                         </p>
+                                         <p class="card-text">
+                                             <span th:text="${#numbers.formatInteger(newStore.getPrice(), 1, 'COMMA') + '円'}"></span>                                            
+                                         </p>                                    
+                                     </div>
+                                 </div>    
+                             </a>            
+                         </div>                                               
+                     </div>
+                     
+                     <div class="row justify-content-center">
+                         <div class="col-xl-5 col-lg-6 col-md-8">                    
+                     
+                             <h2 class="text-center mb-3">エリアから探す</h2>                                        
+                              
+                             <table class="table">
+                                 <tbody>                                                     
+                                     <tr>
+                                         <th>千種区</th>
+                                         <td>
+                                             <a th:href="@{/Store?area=千種区}">千種区</a>
+                                         </td>                                     
+                                     </tr>  
+                                     <tr>
+                                         <th>東区</th>
+                                         <td>
+                                             <a th:href="@{/Store?area=相生町}" class="me-2">相生町</a>
+                                             <a th:href="@{/Store?area=柳下}" class="me-2">柳下</a>
+                                             <a th:href="@{/Store?area=赤塚町}" class="me-2">赤塚町</a>
+                                             <a th:href="@{/Store?area=古出来}" class="me-2">古出来</a>
+                                             <a th:href="@{/Store?area=筒井町}" class="me-2">筒井町</a>
+                                             <a th:href="@{/Store?area=徳川町}">徳川町</a>
+                                         </td>                                     
+                                     </tr>  
+                                     <tr>
+                                         <th>北区</th>
+                                         <td>
+                                             <a th:href="@{/Store?area=芦辺町}" class="me-2">芦辺町</a>
+                                             <a th:href="@{/Store?area=大蔵町}" class="me-2">大蔵町</a>
+                                             <a th:href="@{/Store?area=群馬県}">群馬県</a>                                    
+                                         </td>                                     
+                                     </tr>  
+                                     <tr>
+                                         <th>西区</th>
+                                         <td>
+                                             <a th:href="@{/Store?area=清里町}" class="me-2">清里町</a>
+                                             <a th:href="@{/Store?area=五才美町}" class="me-2">五才美町</a>
+                                             <a th:href="@{/Store?area=香呑町}" class="me-2">香呑町</a>
+                                             <a th:href="@{/Store?area=坂井戸町}">坂井戸町</a>
+                                         </td>                                     
+                                     </tr>  
+                                     <tr>
+                                         <th>中村区</th>
+                                         <td>
+                                             <a th:href="@{/Store?area=伊勢山}" class="me-2">伊勢山</a>
+                                             <a th:href="@{/Store?area=大須}" class="me-2">大須</a>
+                                             <a th:href="@{/Store?area=烏森町}">烏森町</a>
+                                         </td>                                     
+                                     </tr>  
+                                     <tr>
+                                         <th>中区</th>
+                                         <td>
+                                             <a th:href="@{/Store?area=正木}" class="me-2">正木</a>
+                                             <a th:href="@{/Store?area=新栄町}" class="me-2">新栄町</a>
+                                             <a th:href="@{/Store?area=門前町}">門前町</a>
+                                         </td>                                     
+                                     </tr>  
+                                     <tr>
+                                         <th>昭和区</th>
+                                         <td>
+                                             <a th:href="@{/Store?area=曙町}" class="me-2">曙町</a>
+                                             <a th:href="@{/Store?area=池端町}" class="me-2">池端町</a>
+                                             <a th:href="@{/Store?area=北山町}" class="me-2">北山町</a>
+                                             <a th:href="@{/Store?area=五軒家町}">五軒家町</a>
+                                         </td>                                     
+                                     </tr>  
+                                     <tr>
+                                         <th>瑞穂区</th>
+                                         <td>
+                                             <a th:href="@{/Store?area=荒崎町}" class="me-2">荒崎町</a>
+                                             <a th:href="@{/Store?area=石田町}" class="me-2">石田町</a>
+                                             <a th:href="@{/Store?area=大殿町}" class="me-2">大殿町</a>
+                                             <a th:href="@{/Store?area=鍵田町}" class="me-2">鍵田町</a>
+                                             <a th:href="@{/Store?area=亀城町}" class="me-2">亀城町</a>
+                                             <a th:href="@{/Store?area=川澄町}">川澄町</a>
+                                         </td>                                     
+                                     </tr>  
+                                     <tr>
+                                         <th>熱田区</th>
+                                         <td>
+                                             <a th:href="@{/Store?area=青池町}" class="me-2">青池町</a>
+                                             <a th:href="@{/Store?area=池内町}" class="me-2">池内町</a>
+                                             <a th:href="@{/Store?area=内田町}" class="me-2">内田町</a>
+                                             <a th:href="@{/Store?area=三番町}" class="me-2">三番町</a>
+                                             <a th:href="@{/Store?area=白鳥}">白鳥</a>
+                                         </td>                                     
+                                     </tr>  
+                                     <tr>
+                                         <th>中川区</th>
+                                         <td>
+                                             <a th:href="@{/Store?area=荒江町}" class="me-2">荒江町</a>
+                                             <a th:href="@{/Store?area=一色新町}" class="me-2">一色新町</a>
+                                             <a th:href="@{/Store?area=	石場町}" class="me-2">石場町</a>
+                                             <a th:href="@{/Store?area=一柳通}">一柳通</a>
+                                         </td>                                     
+                                     </tr>            
+                                     <tr>
+                                         <th>港区</th>
+                                         <td>
+                                             <a th:href="@{/Store?area=油屋町}" class="me-2">油屋町</a>
+                                             <a th:href="@{/Store?area=入場町}" class="me-2">入場町</a>
+                                             <a th:href="@{/Store?area=一州町}" class="me-2">一州町</a>
+                                             <a th:href="@{/Store?area=大手町}" class="me-2">大手町</a>
+                                             <a th:href="@{/Store?area=金船町}" class="me-2">金船町</a>
+                                             <a th:href="@{/Store?area=川間町}" class="me-2">川間町</a>
+                                             <a th:href="@{/Store?area=正徳町}">正徳町</a>
+                                         </td>                                     
+                                     </tr>  
+                                     <tr>
+                                         <th>南区</th>
+                                         <td>
+                                             <a th:href="@{/Store?area=赤坪町}">赤坪町</a>
+                                         </td>                                     
+                                     </tr>                                                                                                                                                                                                                                                                                                                                                                           
+                                 </tbody>
+                             </table>  
+                         </div>
+                     </div>                                
+                 </div>
+             </main>
+             
+             <!-- フッター -->
+    <div class="d-flex justify-content-center"> 
+		<a th:href="@{/company}">会社概要</a>　　　　
+				<a th:href="@{/kiyaku}">利用規約</a>
+				
+             <div th:replace="~{fragment :: footer}"> </div>
+         </div>    
+           <div class="d-flex justify-content-center">
+      
+         <div th:replace="~{fragment :: scripts}"></div>  
+               
+     </body>
+ </html>
