@@ -32,10 +32,11 @@ public class AuthController {
 		private PaidSignupForm paidsignupForm;
 		private UserRepository userRepository;
 	     
-	     public AuthController(UserService userService, SignupEventPublisher signupEventPublisher, VerificationTokenService verificationTokenService) { 
+	     public AuthController(UserService userService, SignupEventPublisher signupEventPublisher, VerificationTokenService verificationTokenService, UserRepository userRepository) { 
 	         this.userService = userService;    
 	         this.signupEventPublisher = signupEventPublisher;
 	         this.verificationTokenService = verificationTokenService;
+	         this.userRepository = userRepository;
 	     } 
 	     
      @GetMapping("/login")
@@ -49,13 +50,6 @@ public class AuthController {
          return "auth/signup";
       }
      
-     
-     public String AuthController(UserRepository userRepository) {
-         this.userRepository = userRepository;
-         
-		return "auth/paidsignup";
-     
-       }
      
      @GetMapping("/paidsignup")
      public String paidsignup(@AuthenticationPrincipal UserDetailsImpl userDetailsImpl, Model model) {         
