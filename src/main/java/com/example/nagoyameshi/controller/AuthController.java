@@ -50,11 +50,11 @@ public class AuthController {
       }
      
      
-     public String paidController(UserRepository userRepository) {
+     public String AuthController(UserRepository userRepository) {
          this.userRepository = userRepository;
-              
-           return "auth/paidsignup";  
-           
+         
+		return "auth/paidsignup";
+     
        }
      
      @GetMapping("/paidsignup")
