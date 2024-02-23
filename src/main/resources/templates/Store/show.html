@@ -115,21 +115,27 @@
                                      <div sec:authorize="isAnonymous()" class="col-lg-4 px-0 ps-lg-4 mb-4">                  
                                          <div class="card">
                                              <div class="card-body">                                                                                                                                                                                                                     
-                                                 <p class="card-text">予約するには<a th:href="@{/auth/paidsignup}">有料会員登録</a>が必要です。</p>                                                                                                                                            
-                                                 <button type="submit" class="btn text-white shadow-sm w-100 nagoyameshi-btn" disabled>有料会員登録する</button>                                                                                                                
+                                                 <p class="card-text">予約するには<a th:href="@{/auth/paidsignup}">有料会員登録が必要です。</p>                                                                                                                                            
+                                                 <button type="submit" class="btn text-white shadow-sm w-100 nagoyameshi-btn" disabled>有料会員登録する</button></a>                                                                                                                
                                              </div>
                                          </div>  
                                      </div> 
+                                     
                                             <div sec="hasRole('ROLE_PAIDMENBER')" class="col-lg-4 px-0 ps-lg-4 mb-4">                  
                                          <div class="card">
                                              <div class="card-body"> 
                                                  <form method="get" th:action="@{/Store/__${Store.getId()}__/reservations/input}" th:object="${reservationInputForm}">                                                                                                                                                                       
                                                      <div class="form-group mb-2">                                            
-                                                         <label for="fromCheckinDateToCheckoutDate" class="col-form-label text-md-left fw-bold">予約日</label>    
-                                                         <div th:if="${#fields.hasErrors('fromCheckinDateToCheckoutDate')}" class="text-danger small mb-2" th:errors="*{fromCheckinDateToCheckoutDate}"></div>                                          
-                                                         <input type="text" class="form-control" th:field="*{fromCheckinDateToCheckoutDate}">                                                                     
+                                                         <label for="fromCheckinDate" class="col-form-label text-md-left fw-bold">予約日</label>    
+                                                         <div th:if="${#fields.hasErrors('fromCheckinDate')}" class="text-danger small mb-2" th:errors="*{fromCheckinDate}"></div>                                          
+                                                         <input type="text" class="form-control" th:field="*{fromCheckinDate}" >                                                                                                                    
                                                      </div>
                                                      
+                                                       <div class="form-group mb-2">                                            
+                                                         <label for="fromCheckinTime" class="col-form-label text-md-left fw-bold">予約時間</label>    
+                                                         <div th:if="${#fields.hasErrors('fromCheckinTime')}" class="text-danger small mb-2" th:errors="*{fromCheckinDate}"></div>                                          
+                                                         <input type="text" class="form-control" th:field="*{fromCheckinTime}" >                                         
+                                                                                                  
                                                      <div class="form-group mb-4">                                            
                                                          <label for="numberOfPeople" class="col-form-label text-md-left fw-bold">利用人数</label>  
                                                          <div th:if="${#fields.hasErrors('numberOfPeople')}" class="text-danger small mb-2" th:errors="*{numberOfPeople}"></div>                                            

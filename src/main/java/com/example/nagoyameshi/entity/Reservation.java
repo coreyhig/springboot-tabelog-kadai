@@ -2,6 +2,7 @@ package com.example.nagoyameshi.entity;
 
  import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,14 +34,11 @@ public class Reservation {
      @Column(name = "checkin_date")
      private LocalDate checkinDate;
      
-     @Column(name = "checkout_date")
-     private LocalDate checkoutDate;   
+     @Column(name = "checkin_time")
+     private LocalTime checkinTime;
      
      @Column(name = "number_of_people")
-     private Integer numberOfPeople; 
-     
-     @Column(name = "amount")
-     private Integer amount;     
+     private Integer numberOfPeople;    
      
      @Column(name = "created_at", insertable = false, updatable = false)
      private Timestamp createdAt;

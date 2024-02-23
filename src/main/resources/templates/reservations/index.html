@@ -33,10 +33,7 @@
                                  <thead>
                                      <tr>                            
                                          <th scope="col">店舗名</th>
-                                         <th scope="col">チェックイン日</th>
-                                         <th scope="col">チェックアウト日</th>
-                                         <th scope="col">宿泊人数</th>
-                                         <th scope="col">宿泊料金</th>                                        
+                                         <th scope="col">人数</th>                                        
                                      </tr>
                                  </thead>   
                                  <tbody>                                                    
@@ -45,9 +42,8 @@
                                              <a th:href="@{/Store/__${reservation.getStore().getId()}__}" th:text="${reservation.getStore().getName()}"></a>
                                          </td>
                                          <td th:text="${reservation.getCheckinDate()}"></td>
-                                         <td th:text="${reservation.getCheckoutDate()}"></td>
+                                         <td th:text="${reservation.getCheckinTime()}"></td>
                                          <td th:text="${reservation.getNumberOfPeople + '名'}"></td>
-                                         <td th:text="${#numbers.formatInteger(reservation.getAmount(), 1, 'COMMA') + '円'}"></td>
                                      </tr>                                    
                                  </tbody>
                              </table>    

@@ -6,15 +6,16 @@ import lombok.Data;
  @Data
  @AllArgsConstructor
 public class ReservationRegisterForm {    
-     private Integer StoreId;
+ 
+
+	private Integer StoreId;
          
      private Integer userId;    
          
-     private String checkinDate;    
-         
-     private String checkoutDate;    
+     private String checkinDate; 
+     
+     private String checkinTime;  
      
      private Integer numberOfPeople;
-     
-     private Integer amount;    
+       
 }
