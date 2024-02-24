@@ -20,7 +20,7 @@ public class WebSecurityConfig {
              .authorizeHttpRequests((requests) -> requests                
                  .requestMatchers("/css/**", "/images/**", "/js/**", "/storage/**", "/", "/signup/**","/paidsignup/**", "/Store", "/Store/{id}").permitAll()  // すべてのユーザーにアクセスを許可するURL
                  .requestMatchers("/admin/**").hasRole("ADMIN")  // 管理者にのみアクセスを許可するURL
-                 .requestMatchers("/paidmenber/**").hasRole("PAIDMENBER") //有料会員のみアクセスを許可するURL
+                 .requestMatchers("/Store/{id}/reservations/confirm/**").hasRole("PAIDMENBER") //有料会員のみアクセスを許可するURL
                  .anyRequest().authenticated()                   // 上記以外のURLはログインが必要（会員または管理者のどちらでもOK）
              )
              .formLogin((form) -> form
