@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+ <html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+     <head>
+         <div th:replace="~{fragment :: meta}"></div>   
+              
+         <div th:replace="~{fragment :: styles}"></div> 
+         
+         <title>有料会員登録</title>       
+     </head>
+     <body>
+         <div class="samuraitravel-wrapper">
+             <!-- ヘッダー -->
+             <div th:replace="~{fragment :: header}"></div>
+             
+             <main>
+			   
+                 <div class="container pt-4 pb-5 samuraitravel-container">
+                     <div class="row justify-content-center">
+                         <div class="col-xl-5 col-lg-6 col-md-8">                    
+             
+                             <h1 class="mb-4 text-center">有料会員登録されました。<br>
+								 左上のアイコンよりお戻り下さい。</h1>  
+                           
+                             </div>  
+                      </div>
+                     </div>
+                 </div>           
+             </main>
+             
+             <!-- フッター -->
+             <div th:replace="~{fragment :: footer}"></div>
+         </div>    
+         
+         <div th:replace="~{fragment :: scripts}"></div>         
+     </body>
+ </html>
