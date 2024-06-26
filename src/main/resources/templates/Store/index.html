@@ -154,7 +154,7 @@
                                      <input th:if="${price}" type="hidden" name="price" th:value="${price}">                                      
                                      <select class="form-select form-select-sm" name="order" onChange="this.form.submit();">
                                          <option value="createdAtDesc" th:selected="${order == 'createdAtDesc' || order == null}">新着順</option>                                            
-                                         <option value="priceAsc" th:selected="${order == 'priceAsc'}">宿泊料金が安い順</option>
+                                         <option value="priceAsc" th:selected="${order == 'priceAsc'}">料金が安い順</option>
                                      </select>   
                                  </form>  
                              </div>   
